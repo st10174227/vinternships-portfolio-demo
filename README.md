@@ -4,7 +4,13 @@ A personal ASP.NET Core MVC portfolio demo for connecting students to companies 
 
 **Validation:** the personal version and mobile-card revision built successfully on Windows and passed all 25 regression groups on 21 November 2026. Supplied desktop/mobile captures were reviewed. The production container built and passed HTTP redirects, forwarded HTTPS, secure cookies, antiforgery, session separation and primary-page checks. GitHub Actions repeats the checks on Windows/Linux and in a Linux production container.
 
-**Hosting:** Render deployment and hosted browser acceptance are the next step. A public URL will be recorded here only after the deployed service is verified.
+## Live demo
+
+[Try VInternships](https://vinternships-demo-st10174227.onrender.com/) — no account or password required. Use fictional details only; records are temporary and belong to your browser workspace.
+
+**Verified on 21 November 2026:** [GitHub Actions](https://github.com/st10174227/vinternships-portfolio-demo/actions/runs/44927850069) passed Windows and Linux regression jobs and the production-container job for commit `5870633efc1dfba6968ad5133a089e1d20e900fd`. Render deployed that commit successfully. A hosted browser check created a fictional student, company and placement, added 6 then 4 hours with the correct 10-hour total, saved supervisor feedback and confirmed `/health` reports `ok` for `vinternships-demo`.
+
+The hosted check did not exercise independent-browser isolation, reset, stale forms, deletion or all mobile views; these remain separate browser checks, with the functional cases covered by the automated suites. Supplied local desktop/mobile screenshots were reviewed earlier. This demo does not contact real students, companies or supervisors.
 
 ## Try it locally on Windows
 
@@ -44,7 +50,7 @@ Only cookie protection keys are written to `App_Data/PersonalDemo/Keys` locally,
 
 The console checker contains **25 groups** covering rendering, validation, version conflicts, additive hours, parent references, deletion, isolation, reset, caps and expiry. It runs against in-process HTTP with independent cookie jars and temporary fixtures. Production-style HTTP-to-HTTPS redirection and secure-cookie form rendering are included. Test content-root configuration is supplied when the application builder is created.
 
-Windows build, all 25 regression groups and the production container checks passed in user-supplied output. Static preparation additionally checked C# and PowerShell syntax, project XML, local asset references, original source hashes and packaging. Hosted acceptance and visual review of expanded navigation, forms and placement details remain separate from the supplied overview/list screenshots.
+Windows build, all 25 regression groups and the production container checks passed in user-supplied output. Static preparation additionally checked C# and PowerShell syntax, project XML, local asset references, original source hashes and packaging. The hosted creation, hours and feedback workflow was subsequently checked as described above. Expanded navigation, the remaining mobile form layouts and the unexercised hosted cases still require separate visual/manual acceptance.
 
 ## Deploy the public demo
 
