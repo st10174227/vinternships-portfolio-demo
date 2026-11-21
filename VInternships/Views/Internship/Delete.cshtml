@@ -1,0 +1,4 @@
+@model PlacementRow
+@{ ViewData["Title"]="Delete placement"; }
+<div class="page-heading"><div><p class="eyebrow">PLACEMENTS</p><h1>Delete this placement?</h1><p>@Model.Student.Name · @Model.Placement.Position · @Model.Company.Name</p></div></div>
+<form asp-action="Delete" method="post" class="panel form-panel"><div asp-validation-summary="All" class="validation" role="alert"></div><input name="id" value="@Model.Placement.Id" type="hidden" /><input name="version" value="@Model.Placement.Version" type="hidden" /><p>This removes the placement, its logged hours and feedback from your sample workspace. The student and company will remain.</p><div class="actions"><button class="btn btn-danger" type="submit">Delete placement</button><a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@Model.Placement.Id">Cancel</a></div></form>

@@ -1,0 +1,4 @@
+@model Company
+@{ ViewData["Title"]="Delete company"; }
+<div class="page-heading"><div><p class="eyebrow">COMPANIES</p><h1>Delete this company?</h1><p>@Model.Name</p></div></div>
+<form asp-action="Delete" method="post" class="panel form-panel"><div asp-validation-summary="All" class="validation" role="alert"></div><input name="id" value="@Model.Id" type="hidden" /><input name="version" value="@Model.Version" type="hidden" /><p>This removes the record from your sample workspace. A company linked to a placement cannot be deleted until those placements are removed.</p><div class="actions"><button class="btn btn-danger" type="submit">Delete company</button><a class="btn btn-outline-secondary" asp-action="Index">Cancel</a></div></form>

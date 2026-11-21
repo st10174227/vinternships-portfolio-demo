@@ -1,0 +1,20 @@
+@model Dashboard
+@{ ViewData["Title"]="Overview"; }
+<section class="hero"><div><p class="eyebrow">PLACEMENT WORKSPACE</p><h1>A clearer view of every internship.</h1><p class="lead">Connect students and companies, track placement hours and keep feedback together.</p><div class="actions"><a class="btn btn-primary" asp-controller="Internship" asp-action="Create">Create a placement <span aria-hidden="true">↗</span></a><a class="btn btn-outline-primary" asp-controller="Demo" asp-action="Index">How to try it</a></div></div><aside class="hero-note"><span class="tiny-label">YOUR SAMPLE WORKSPACE</span><strong>Explore. Update.<br />Start fresh.</strong><p>No sign-in needed. Changes belong to this browser and are temporary.</p></aside></section>
+<section class="stats" aria-label="Workspace totals"><div class="stat"><span>Students</span><strong>@Model.Students</strong><a asp-controller="Student" asp-action="Index">View students →</a></div><div class="stat"><span>Companies</span><strong>@Model.Companies</strong><a asp-controller="Company" asp-action="Index">View companies →</a></div><div class="stat"><span>Placements</span><strong>@Model.Placements</strong><a asp-controller="Internship" asp-action="Index">View placements →</a></div><div class="stat"><span>Hours logged</span><strong>@Model.Hours</strong><span class="muted">Across sample placements</span></div></section>
+<div class="section-heading"><div><p class="eyebrow">AT A GLANCE</p><h2>Placement activity</h2></div><a asp-controller="Internship" asp-action="Index">View all placements →</a></div>
+<div class="panel table-responsive desktop-records"><table class="table"><caption class="visually-hidden">Recent sample placements</caption><thead><tr><th>Student / position</th><th>Company</th><th>Dates</th><th>Status</th><th>Hours</th><th><span class="visually-hidden">Action</span></th></tr></thead><tbody>
+@foreach(var row in Model.Recent) { <tr><td><strong>@row.Student.Name</strong><span class="cell-note">@row.Placement.Position</span></td><td>@row.Company.Name</td><td class="date-cell">@row.Placement.StartDate.ToString("dd MMM yyyy")<span class="cell-note">to @row.Placement.EndDate.ToString("dd MMM yyyy")</span></td><td><span class="status @row.Status.ToLowerInvariant()">@row.Status</span></td><td>@row.Placement.HoursLogged</td><td><a asp-controller="Internship" asp-action="Details" asp-route-id="@row.Placement.Id">Open <span class="visually-hidden">@row.Student.Name placement</span> →</a></td></tr> }
+</tbody></table></div>
+<section class="mobile-records" aria-label="Sample placements">
+@foreach(var row in Model.Recent) {
+<article class="mobile-record">
+<div class="record-heading"><h3>@row.Student.Name</h3><span class="status @row.Status.ToLowerInvariant()">@row.Status</span></div>
+<p class="record-position">@row.Placement.Position</p>
+<dl class="record-meta"><div><dt>Company</dt><dd>@row.Company.Name</dd></div><div><dt>Dates</dt><dd>@row.Placement.StartDate.ToString("dd MMM yyyy") <span>to</span> @row.Placement.EndDate.ToString("dd MMM yyyy")</dd></div><div><dt>Hours logged</dt><dd>@row.Placement.HoursLogged hours</dd></div></dl>
+<div class="record-actions"><a class="btn btn-primary" asp-controller="Internship" asp-action="Details" asp-route-id="@row.Placement.Id">Open placement<span class="visually-hidden"> for @row.Student.Name</span></a></div>
+</article>
+}
+</section>
+@if(Model.Recent.Count==0) { <p class="empty-state">No placements yet. Add a student and company, then create your first sample placement.</p> }
+<section class="guide-strip"><h2>Try the full workflow</h2><p>Add a fictional student, choose a company and create a placement. Add hours and supervisor feedback from its details page.</p></section>

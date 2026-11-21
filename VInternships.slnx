@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="VInternships/VInternships.csproj" />
+  <Project Path="VInternships.Checks/VInternships.Checks.csproj" />
+</Solution>

@@ -1,0 +1,9 @@
+@model CompanyForm
+@{ var editing=Model.Id.Length>0;var action=editing?"Edit":"Create";ViewData["Title"]=(editing?"Edit":"Add")+" company"; }
+<div class="page-heading"><div><p class="eyebrow">COMPANIES</p><h1>@ViewData["Title"]</h1><p>Use fictional details. Nothing here contacts a real person.</p></div></div>
+<form asp-action="@action" method="post" class="panel form-panel"><div asp-validation-summary="All" class="validation" role="alert"></div><input asp-for="Id" type="hidden" /><input asp-for="Version" type="hidden" />
+<div class="field"><label asp-for="Name"></label><input asp-for="Name" type="text" class="form-control" maxlength="100" /><span asp-validation-for="Name" class="field-error"></span></div>
+<div class="field"><label asp-for="Industry"></label><input asp-for="Industry" type="text" class="form-control" maxlength="80" /><span asp-validation-for="Industry" class="field-error"></span></div>
+<div class="field"><label asp-for="Location"></label><input asp-for="Location" type="text" class="form-control" maxlength="100" /><span asp-validation-for="Location" class="field-error"></span></div>
+<div class="field"><label asp-for="ContactEmail"></label><input asp-for="ContactEmail" type="email" class="form-control" maxlength="160" /><span asp-validation-for="ContactEmail" class="field-error"></span></div>
+<div class="actions"><button class="btn btn-primary" type="submit">Save company</button><a class="btn btn-outline-secondary" asp-action="Index">Cancel</a></div></form>

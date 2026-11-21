@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: vinternships-demo-st10174227
+    branch: main
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile.demo
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: AllowedHosts
+        value: "vinternships-demo-st10174227.onrender.com;localhost;127.0.0.1"
+      - key: ASPNETCORE_FORWARDEDHEADERS_ENABLED
+        value: "true"
+      - key: ASPNETCORE_HTTP_PORTS
+        value: "8080"
+      - key: PORT
+        value: "8080"
+      - key: ASPNETCORE_HTTPS_PORT
+        value: "443"
+      - key: VINTERNSHIPS_DEMO_DATA_DIR
+        value: /tmp/vinternships-demo

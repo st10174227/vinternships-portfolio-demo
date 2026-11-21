@@ -1,0 +1,27 @@
+name: Personal demo checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet build VInternships.Checks/VInternships.Checks.csproj --configuration Release --nologo -warnaserror -p:NuGetAuditMode=all
+      - run: dotnet run --project VInternships.Checks/VInternships.Checks.csproj --configuration Release --no-build --no-launch-profile
+  production-container:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: docker build --file Dockerfile.demo --tag vinternships-demo:ci .
+      - run: ./scripts/Test-ProductionContainer.ps1 -Image 'vinternships-demo:ci'
+        shell: pwsh

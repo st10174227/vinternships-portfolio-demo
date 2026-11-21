@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>@ViewData["Title"] · VInternships</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><nav class="navbar navbar-expand-md navbar-dark shell" aria-label="Main navigation">
+<a class="navbar-brand" asp-controller="Home" asp-action="Index"><span class="brand-mark" aria-hidden="true">vi.</span> VInternships</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Open navigation"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navigation"><div class="navbar-nav ms-auto">
+<a class="nav-link" asp-controller="Home" asp-action="Index">Overview</a><a class="nav-link" asp-controller="Student" asp-action="Index">Students</a><a class="nav-link" asp-controller="Company" asp-action="Index">Companies</a><a class="nav-link" asp-controller="Internship" asp-action="Index">Placements</a><a class="nav-link" asp-controller="Demo" asp-action="Index">About the demo</a>
+</div></div></nav></header>
+<div class="demo-banner"><div class="shell">Interactive demo <span aria-hidden="true">·</span> Fictional students and companies. No applications or emails are sent.</div></div>
+<main id="main" class="shell main-content">
+@if(TempData["Success"] is string message) { <div class="alert alert-success" role="status">@message</div> }
+@RenderBody()
+</main>
+<footer class="site-footer"><div class="shell footer-inner"><span>VInternships / Personal project by Mohammed Ba Yazed</span><a asp-controller="Home" asp-action="Privacy">Demo data &amp; privacy</a></div></footer>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body></html>

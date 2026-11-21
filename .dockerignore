@@ -1,0 +1,13 @@
+**/bin/
+**/obj/
+**/App_Data/
+.git/
+.github/
+VInternships.Checks/
+scripts/
+docs/
+artifacts/
+**/*.user
+**/*.db*
+**/.env*
+**/*secrets*.json

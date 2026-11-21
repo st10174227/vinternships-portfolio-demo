@@ -1,0 +1,12 @@
+@model IReadOnlyList<Company>
+@{ ViewData["Title"]="Companies"; }
+<div class="page-heading"><div><p class="eyebrow">DIRECTORY</p><h1>Companies</h1><p>Explore the fictional companies hosting sample placements.</p></div><a class="btn btn-primary" asp-action="Create">Add company</a></div>
+<div class="panel table-responsive desktop-records"><table class="table"><caption class="visually-hidden">Sample companies</caption><thead><tr><th>Company</th><th>Industry</th><th>Location</th><th>Actions</th></tr></thead><tbody>
+@foreach(var record in Model) { <tr><td><strong>@record.Name</strong><span class="cell-note">@record.ContactEmail</span></td><td>@record.Industry</td><td>@record.Location</td><td><div class="row-actions"><a asp-action="Details" asp-route-id="@record.Id">Details</a><a asp-action="Edit" asp-route-id="@record.Id">Edit</a><a class="danger-link" asp-action="Delete" asp-route-id="@record.Id">Delete</a></div></td></tr> }
+</tbody></table></div>
+<section class="mobile-records" aria-label="Sample company records">
+@foreach(var record in Model) {
+<article class="mobile-record"><h2 class="record-name">@record.Name</h2><dl class="record-meta"><div><dt>Industry</dt><dd>@record.Industry</dd></div><div><dt>Location</dt><dd>@record.Location</dd></div><div><dt>Contact email</dt><dd>@record.ContactEmail</dd></div></dl><div class="record-actions"><a class="btn btn-primary" asp-action="Details" asp-route-id="@record.Id">Details<span class="visually-hidden"> for @record.Name</span></a><a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@record.Id">Edit<span class="visually-hidden"> @record.Name</span></a><a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@record.Id">Delete<span class="visually-hidden"> @record.Name</span></a></div></article>
+}
+</section>
+@if(Model.Count==0) { <p class="empty-state">No records yet. Add a fictional record to begin.</p> }

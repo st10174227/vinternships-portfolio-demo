@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+COPY VInternships/VInternships.csproj VInternships/
+RUN dotnet restore VInternships/VInternships.csproj
+COPY VInternships/ VInternships/
+RUN dotnet publish VInternships/VInternships.csproj --configuration Release --no-restore --output /app/publish /p:UseAppHost=false
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+WORKDIR /app
+ENV ASPNETCORE_HTTP_PORTS=8080 ASPNETCORE_HTTPS_PORT=443 ASPNETCORE_ENVIRONMENT=Production VINTERNSHIPS_DEMO_DATA_DIR=/tmp/vinternships-demo
+COPY --from=build /app/publish/ ./
+USER app
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "VInternships.dll"]
